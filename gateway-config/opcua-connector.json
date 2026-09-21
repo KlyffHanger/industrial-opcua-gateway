@@ -15,7 +15,7 @@
   "mapping": [
     {
       "deviceNodeSource": "path",
-      "deviceNodePattern": "Root\\.Objects\\.2:Device1",
+      "deviceNodePattern": "Root\\.Objects\\.<NAMESPACE_INDEX>:Device1",
       "deviceInfo": {
         "deviceNameExpression": "Test-PLC",
         "deviceNameExpressionSource": "constant",
