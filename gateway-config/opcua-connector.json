@@ -1,0 +1,46 @@
+{
+  "server": {
+    "url": "opc.tcp://host.docker.internal:4840/freeopcua/server/",
+    "timeoutInMillis": 5000,
+    "scanPeriodInMillis": 3600000,
+    "pollPeriodInMillis": 5000,
+    "enableSubscriptions": false,
+    "subCheckPeriodInMillis": 100,
+    "showMap": false,
+    "security": "None",
+    "identity": {
+      "type": "anonymous"
+    }
+  },
+  "mapping": [
+    {
+      "deviceNodeSource": "path",
+      "deviceNodePattern": "Root\\.Objects\\.2:Device1",
+      "deviceInfo": {
+        "deviceNameExpression": "Test-PLC",
+        "deviceNameExpressionSource": "constant",
+        "deviceProfileExpressionSource": "constant",
+        "deviceProfileExpression": "Device"
+      },
+      "attributes": [],
+      "timeseries": [
+        {
+          "key": "temperature",
+          "type": "path",
+          "value": "${Temperature}"
+        },
+        {
+          "key": "humidity",
+          "type": "path",
+          "value": "${Humidity}"
+        }
+      ],
+      "rpc_methods": [],
+      "attributes_updates": []
+    }
+  ],
+  "logLevel": "INFO",
+  "name": "tb-plc-connector",
+  "enableRemoteLogging": false,
+  "configVersion": "3.8.4"
+}

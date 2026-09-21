@@ -1,0 +1,34 @@
+services:
+  thingsboard:
+    image: thingsboard/tb-postgres:latest
+    container_name: thingsboard
+    restart: unless-stopped
+    ports:
+      - "8080:9090"
+      - "1883:1883"
+      - "7071:7070"
+    volumes:
+      - tb-data:/var/lib/postgresql/data
+
+  tb-gateway:
+    image: thingsboard/tb-gateway:latest
+    build: ./tb-gateway
+    container_name: tb-gateway
+    restart: always
+    depends_on:
+      - thingsboard
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - tb-gw-config:/thingsboard_gateway/config
+      - tb-gw-logs:/thingsboard_gateway/logs
+      - tb-gw-extensions:/thingsboard_gateway/extensions
+
+volumes:
+  tb-data:
+  tb-gw-config:
+  tb-gw-logs:
+  tb-gw-extensions:
